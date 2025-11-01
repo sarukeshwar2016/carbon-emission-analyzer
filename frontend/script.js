@@ -2,7 +2,7 @@
    Global Carbon Emission Analyzer – script.js
    ============================================================== */
 
-const apiKey = "8H1Z9GEE6X7EKCZQC72KV2SFHC";
+const apiKey = "Your_API_Key";
 const apiUrl = "https://api.climatiq.io/estimate";
 
 const countries = [
