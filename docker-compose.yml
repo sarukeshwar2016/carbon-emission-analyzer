@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  redis:
+    image: redis:latest
+    container_name: redis_cache
+    ports:
+      - "6379:6379"
+
+  backend:
+    build: ./backend
+    container_name: carbon_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - CLIMATIQ_API_KEY=XW19PTCCWD6HD31X4K93X1N9S4
+      - REDIS_HOST=redis
+    depends_on:
+      - redis
+
+  frontend:
+    image: nginx:alpine
+    container_name: carbon_frontend
+    ports:
+      - "8080:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+    depends_on:
+      - backend

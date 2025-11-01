@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Global Carbon Emission Analyzer</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Our CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Global Carbon Emission Analyzer</h1>
+      <p class="subtitle">Compare CO₂, CH₄, N₂O emissions across 10 countries using real grid data</p>
+    </header>
+
+    <div class="controls">
+      <div class="input-group">
+        <input type="number" id="energyInput" placeholder="Enter energy (kWh)" min="1" step="0.1" />
+      </div>
+      <button onclick="calculateForAll()">Estimate Emissions</button>
+
+      <input type="text" class="search-box" id="searchInput" placeholder="Search country..." onkeyup="filterTable()" />
+
+      <div class="theme-toggle">
+        <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">Moon</button>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="stats" id="stats">
+        <div class="stat-card"><div class="stat-value">--</div><div class="stat-label">Highest</div></div>
+        <div class="stat-card"><div class="stat-value">--</div><div class="stat-label">Lowest</div></div>
+        <div class="stat-card"><div class="stat-value">--</div><div class="stat-label">Average</div></div>
+        <div class="stat-card"><div class="stat-value">--</div><div class="stat-label">Total</div></div>
+      </div>
+
+      <div class="chart-container">
+        <canvas id="emissionChart"></canvas>
+      </div>
+
+      <table id="resultsTable">
+        <thead>
+          <tr>
+            <th onclick="sortTable(0)">Country</th>
+            <th onclick="sortTable(1)">Region</th>
+            <th onclick="sortTable(2)">CO₂e (kg)</th>
+            <th onclick="sortTable(3)">CO₂ (kg)</th>
+            <th onclick="sortTable(4)">CH₄ (kg)</th>
+            <th onclick="sortTable(5)">N₂O (kg)</th>
+            <th onclick="sortTable(6)">Year</th>
+            <th onclick="sortTable(7)">Source</th>
+          </tr>
+        </thead>
+        <tbody id="resultsBody">
+          <tr><td colspan="8" class="loading">Enter energy and click “Estimate Emissions”</td></tr>
+        </tbody>
+      </table>
+
+      <p class="note">
+        *CH₄ and N₂O are estimated if not provided (0.1 % and 0.05 % of total CO₂e)<br>
+        Data powered by <strong>Climatiq API</strong> | Fallback: Regional averages
+      </p>
+    </div>
+  </div>
+
+  <!-- Our JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
