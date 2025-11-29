@@ -214,3 +214,5 @@ async function calculateForAll() {
 document.getElementById("energyInput").addEventListener("keypress", e => {
   if (e.key === "Enter") calculateForAll();
 });
+
+// eslint-disable-next-line
